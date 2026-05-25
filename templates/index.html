@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Performance Prediction System</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+
+            font-family: 'Segoe UI', sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #D8C2BE,
+                #9B6A8B,
+                #2F243A
+            );
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px;
+        }
+
+        .container{
+
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .header{
+
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1{
+
+            font-size: 40px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p{
+
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .form-card{
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow: 0px 10px 40px rgba(0,0,0,0.25);
+        }
+
+        .form-group{
+
+            margin-bottom: 22px;
+        }
+
+        label{
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: 600;
+
+            color: #2F243A;
+        }
+
+        input,
+        select{
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus{
+
+            border-color: #9B6A8B;
+
+            outline: none;
+
+            box-shadow: 0px 0px 8px rgba(155,106,139,0.4);
+        }
+
+        .predict-btn{
+
+            width: 100%;
+
+            padding: 16px;
+
+            background: #9B6A8B;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .predict-btn:hover{
+
+            background: #2F243A;
+
+            transform: translateY(-2px);
+        }
+
+        .result-box{
+
+            margin-top: 25px;
+
+            padding: 18px;
+
+            background: #D8C2BE;
+
+            border-left: 6px solid #9B6A8B;
+
+            border-radius: 10px;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            color: #2F243A;
+
+            text-align: center;
+        }
+
+        @media(max-width:768px){
+
+            .form-card{
+
+                padding: 25px;
+            }
+
+            .header h1{
+
+                font-size: 30px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <h1>Employee Performance Prediction System</h1>
+
+            <p>
+                Predict employee performance using Machine Learning
+                based on employee department, job role,
+                salary hike, experience and satisfaction level.
+            </p>
+
+        </div>
+
+        <!-- FORM CARD -->
+
+        <div class="form-card">
+
+            <form action="/predict" method="POST">
+
+                <!-- Department -->
+
+                <div class="form-group">
+
+                    <label>Employee Department</label>
+
+                    <select name="EmpDepartment" required>
+
+                        <option value="">Select Department</option>
+
+                        <option>Data Science</option>
+                        <option>Development</option>
+                        <option>Finance</option>
+                        <option>Human Resources</option>
+                        <option>Research & Development</option>
+                        <option>Sales</option>
+
+                    </select>
+
+                </div>
+
+                <!-- Job Role -->
+
+                <div class="form-group">
+
+                    <label>Employee Job Role</label>
+
+                    <select name="EmpJobRole" required>
+
+                        <option value="">Select Job Role</option>
+
+                        <option>Business Analyst</option>
+                        <option>Data Scientist</option>
+                        <option>Developer</option>
+                        <option>Finance Manager</option>
+                        <option>Healthcare Representative</option>
+                        <option>Human Resources</option>
+                        <option>Laboratory Technician</option>
+                        <option>Manager</option>
+                        <option>Manager R&D</option>
+                        <option>Manufacturing Director</option>
+                        <option>Research Director</option>
+                        <option>Research Scientist</option>
+                        <option>Sales Executive</option>
+                        <option>Sales Representative</option>
+                        <option>Senior Developer</option>
+                        <option>Senior Manager R&D</option>
+                        <option>Technical Architect</option>
+                        <option>Technical Lead</option>
+
+                    </select>
+
+                </div>
+
+                <!-- Salary Hike -->
+
+                <div class="form-group">
+
+                    <label>Salary Hike Percentage</label>
+
+                    <input type="number"
+                           name="EmpLastSalaryHikePercent"
+                           placeholder="Enter salary hike percentage"
+                           min="0"
+                           max="20"
+                           step="0.1"
+                           required>
+
+                </div>
+
+                <!-- Environment Satisfaction -->
+
+                <div class="form-group">
+
+                    <label>Environment Satisfaction</label>
+
+                    <select name="EmpEnvironmentSatisfaction" required>
+
+                        <option value="">Select Satisfaction Level</option>
+
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+                        <option>Very High</option>
+
+                    </select>
+
+                </div>
+
+                <!-- Years Since Last Promotion -->
+
+                <div class="form-group">
+
+                    <label>Years Since Last Promotion</label>
+
+                    <input type="number"
+                           name="YearsSinceLastPromotion"
+                           placeholder="Enter years since last promotion"
+                           required>
+
+                </div>
+
+                <!-- Current Role Experience -->
+
+                <div class="form-group">
+
+                    <label>Experience Years In Current Role</label>
+
+                    <input type="number"
+                           name="ExperienceYearsInCurrentRole"
+                           placeholder="Enter experience years in current role"
+                           required>
+
+                </div>
+
+                <!-- Company Experience -->
+
+                <div class="form-group">
+
+                    <label>Experience Years At This Company</label>
+
+                    <input type="number"
+                           name="ExperienceYearsAtThisCompany"
+                           placeholder="Enter years at this company"
+                           required>
+
+                </div>
+
+                <!-- Current Manager -->
+
+                <div class="form-group">
+
+                    <label>Years With Current Manager</label>
+
+                    <input type="number"
+                           name="YearsWithCurrManager"
+                           placeholder="Enter years with current manager"
+                           required>
+
+                </div>
+
+                <!-- BUTTON -->
+
+                <button type="submit" class="predict-btn">
+
+                    Predict Employee Performance
+
+                </button>
+
+            </form>
+
+            <!-- RESULT -->
+
+            {% if prediction_text %}
+
+            <div class="result-box">
+
+                {{ prediction_text }}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", () => {
+
+                alert("Predicting Employee Performance...");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
